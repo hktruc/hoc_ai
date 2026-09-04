@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Giáo trình AI Agent Architecture từ nền tảng đến thực chiến: 28 bài, 7 chặng, hướng tới xây agent local chuyên biệt." />
+  <title>AI Agent Architecture — Giáo trình tự học</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">GIÁO TRÌNH TỰ HỌC • 28 BÀI • 7 CHẶNG</div>
+      <h1>AI Agent Architecture<br><span>Từ nền tảng đến thực chiến</span></h1>
+      <p class="lead">Học cách nhìn một quy trình thực tế, phân rã công việc, quyết định phần nào dùng code — phần nào dùng AI — phần nào cần agent tự quyết định, rồi thiết kế kiến trúc hệ thống hoàn chỉnh.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#lo-trinh">Bắt đầu học</a>
+        <a class="btn ghost" href="#project">Xem dự án cuối khóa</a>
+      </div>
+      <div class="stats">
+        <div><strong>8–10</strong><span>tuần</span></div>
+        <div><strong>28</strong><span>bài học</span></div>
+        <div><strong>4</strong><span>mini project</span></div>
+        <div><strong>1</strong><span>agent hoàn chỉnh</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro" id="muc-tieu">
+      <div class="container two-col">
+        <div>
+          <div class="section-kicker">MỤC TIÊU</div>
+          <h2>Không học framework trước. Học tư duy kiến trúc trước.</h2>
+        </div>
+        <div class="card soft">
+          <p>Đích đến không phải là “biết dùng LangChain” hay “biết gọi một API”. Đích đến là có khả năng tự thiết kế một <strong>AI Agent chạy local, dùng API, có workflow rõ ràng, phục vụ một mục đích chuyên biệt</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section principle">
+      <div class="container">
+        <div class="section-kicker">NGUYÊN TẮC XUYÊN SUỐT</div>
+        <h2>Luôn tư duy theo thứ tự này</h2>
+        <div class="flow">
+          <span>Business Problem</span><b>→</b><span>Work Process</span><b>→</b><span>Task Decomposition</span><b>→</b><span>Deterministic / AI</span><b>→</b><span>Workflow</span><b>→</b><span>Tools</span><b>→</b><span>Context</span><b>→</b><span>State</span><b>→</b><span>Agent Loop</span><b>→</b><span>Evaluation</span><b>→</b><span>Framework</span><b>→</b><span>Model</span>
+        </div>
+        <div class="warning">Đừng bắt đầu bằng câu hỏi: <strong>“GPT hay Claude? LangChain hay n8n? MCP hay framework nào?”</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="lo-trinh">
+      <div class="container">
+        <div class="section-kicker">LỘ TRÌNH 7 CHẶNG</div>
+        <h2>28 bài học từ tư duy đến production</h2>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">01</span><div><h3>Tư duy nền tảng</h3><p>Hiểu Agent thực chất là gì trước khi viết code.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 1. AI Agent không phải chatbot</h4><p>Phân biệt Chatbot, LLM App, LLM + Tools, Workflow, Agent và Multi-Agent. Hiểu khi nào không nên dùng agent.</p><div class="code-line">WORKFLOW = code quyết định đường đi • AGENT = model quyết định đường đi</div></div>
+            <div class="lesson"><h4>Bài 2. Goal → Task → Action</h4><p>Phân rã mục tiêu thành task, subtask, action và tool. Thiết kế công việc trước khi chọn công nghệ.</p></div>
+            <div class="lesson"><h4>Bài 3. Deterministic vs Probabilistic</h4><p>Việc chắc chắn dùng code; việc cần hiểu, phân loại, lập kế hoạch và ra quyết định mới giao cho LLM.</p></div>
+            <div class="lesson"><h4>Bài 4. Kiến trúc cơ bản của Agent</h4><p>Nắm vòng lặp Observe → Reason → Act → Observe, cùng Model, State, Tools và Environment.</p></div>
+          </div>
+          <div class="project-strip"><strong>Mini project 1:</strong> Thiết kế trên giấy một Agent sắp xếp thư mục Downloads — chưa dùng framework.</div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">02</span><div><h3>Workflow Design</h3><p>Biết thiết kế luồng xử lý trước khi biến nó thành agent.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 5. Prompt Chaining</h4><p>Ghép nhiều bước LLM theo chuỗi: Transcript → Clean → Summary → Social Content.</p></div>
+            <div class="lesson"><h4>Bài 6. Routing</h4><p>Phân loại input/intent và điều phối sang đúng nhánh xử lý.</p></div>
+            <div class="lesson"><h4>Bài 7. Parallelization</h4><p>Chạy đồng thời các tác vụ độc lập, sau đó tổng hợp kết quả.</p></div>
+            <div class="lesson"><h4>Bài 8. Orchestrator–Worker</h4><p>Một orchestrator phân rã việc và giao cho các worker chuyên biệt.</p></div>
+            <div class="lesson"><h4>Bài 9. Evaluator–Optimizer</h4><p>Generate → Evaluate → Pass/Fail → Improve → Evaluate. Nền tảng để agent tự sửa kết quả.</p></div>
+          </div>
+          <div class="project-strip"><strong>Mini project 2:</strong> Thiết kế workflow Transcript Zoom → biên tập → tóm tắt → mô tả YouTube.</div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">03</span><div><h3>Tools</h3><p>Cho agent khả năng tác động lên thế giới thật một cách rõ ràng và kiểm soát được.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 10. Function Calling</h4><p>LLM chọn tool → code thực thi → tool result quay về LLM → agent quyết định bước tiếp theo.</p></div>
+            <div class="lesson"><h4>Bài 11. Tool Design</h4><p>Tool tốt phải có tên rõ, input rõ, output rõ, phạm vi rõ, lỗi rõ. Tránh “do_everything()”.</p></div>
+            <div class="lesson"><h4>Bài 12. Tool Router</h4><p>Dạy agent WHEN to use, WHEN NOT to use và WHAT arguments cho từng tool.</p></div>
+            <div class="lesson"><h4>Bài 13. MCP</h4><p>Hiểu MCP là chuẩn giao tiếp giúp model truy cập tools/resources — không phải bản thân agent.</p></div>
+          </div>
+          <div class="project-strip"><strong>Mini project 3:</strong> Python agent kiểm tra video: metadata, resolution, audio và đưa nhận xét bằng LLM.</div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">04</span><div><h3>Context, State & Memory</h3><p>Quản trị đúng thông tin mà agent được nhìn thấy và ghi nhớ.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 14. Context Engineering</h4><p>Context gồm system instruction, user request, state, tool result, files, memory, examples và history.</p></div>
+            <div class="lesson"><h4>Bài 15. Context Window</h4><p>Token budget, overflow, compression, selective retrieval và summarization.</p></div>
+            <div class="lesson"><h4>Bài 16. State</h4><p>Biết agent đang ở đâu trong tiến trình: task, step, file hiện tại, những gì đã hoàn tất.</p></div>
+            <div class="lesson"><h4>Bài 17. Memory</h4><p>Phân biệt Working, Session, Long-term, Semantic và Procedural Memory.</p></div>
+            <div class="lesson"><h4>Bài 18. Filesystem as Memory</h4><p>Với agent local, filesystem + Markdown/JSON thường minh bạch và dễ debug hơn vector DB.</p></div>
+          </div>
+          <div class="project-strip"><strong>Mini project 4:</strong> Agent nhận task → lưu state → dừng → mở lại → tiếp tục công việc.</div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">05</span><div><h3>Agent Loop</h3><p>Bây giờ mới thực sự xây một agent có khả năng tự quyết định bước tiếp theo.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 19. ReAct Pattern</h4><p>Reason → Act → Observe → Reason. Gắn suy luận với hành động và quan sát thực tế.</p></div>
+            <div class="lesson"><h4>Bài 20. Planning</h4><p>So sánh Plan-first với Dynamic Planning và chọn mức tự trị phù hợp.</p></div>
+            <div class="lesson"><h4>Bài 21. Stopping Conditions</h4><p>Task complete, max steps, max cost, timeout, human required — agent phải biết khi nào dừng.</p></div>
+            <div class="lesson"><h4>Bài 22. Error Recovery</h4><p>Retry, alternative tool, rollback, ask human hoặc stop khi API/tool/output thất bại.</p></div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">06</span><div><h3>Reliability & Safety</h3><p>Đưa agent từ demo sang hệ thống có thể tin cậy.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 23. Guardrails</h4><p>Input guardrail → Agent → Tool permission → Environment → Output validation.</p></div>
+            <div class="lesson"><h4>Bài 24. Human in the Loop</h4><p>GREEN: tự làm • YELLOW: làm và ghi log • RED: phải xin phép.</p></div>
+            <div class="lesson"><h4>Bài 25. Sandboxing</h4><p>Kiểm soát quyền run shell, Python, filesystem và web để giới hạn thiệt hại khi agent sai.</p></div>
+            <div class="lesson"><h4>Bài 26. Evaluation</h4><p>Đo success rate, tool success, task completion, latency, token cost và retry rate bằng test cases thật.</p></div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-head"><span class="stage-no">07</span><div><h3>Framework & Production</h3><p>Chỉ học framework sau khi đã hiểu bản chất kiến trúc.</p></div></div>
+          <div class="lesson-grid">
+            <div class="lesson"><h4>Bài 27. Framework</h4><p>Thứ tự đề xuất: Python + raw API → OpenAI Agents SDK → LangGraph → Google ADK.</p></div>
+            <div class="lesson"><h4>Bài 28. Multi-Agent</h4><p>Chỉ dùng khi single-agent + tools không còn đủ. Nhiều lúc 1 agent + 5 tools tốt hơn 5 agents.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section schedule">
+      <div class="container">
+        <div class="section-kicker">KẾ HOẠCH 10 TUẦN</div>
+        <h2>3 buổi × 90 phút mỗi tuần</h2>
+        <div class="week-grid">
+          <div><b>Tuần 1</b><span>Agent fundamentals</span></div><div><b>Tuần 2</b><span>Workflow patterns</span></div>
+          <div><b>Tuần 3</b><span>Tool calling</span></div><div><b>Tuần 4</b><span>Tool design + MCP</span></div>
+          <div><b>Tuần 5</b><span>Context engineering</span></div><div><b>Tuần 6</b><span>State + Memory</span></div>
+          <div><b>Tuần 7</b><span>Agent loop + planning</span></div><div><b>Tuần 8</b><span>Error handling + guardrails</span></div>
+          <div><b>Tuần 9</b><span>Evaluation</span></div><div><b>Tuần 10</b><span>Framework + final project</span></div>
+        </div>
+        <div class="ratio"><span><b>30%</b> đọc</span><span><b>20%</b> tư duy kiến trúc</span><span><b>50%</b> làm project</span></div>
+      </div>
+    </section>
+
+    <section class="section sources">
+      <div class="container">
+        <div class="section-kicker">TÀI LIỆU GỐC NÊN ĐỌC</div>
+        <h2>Ít nguồn, nhưng đọc đúng nguồn</h2>
+        <div class="source-grid">
+          <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"><b>Anthropic</b><span>Building Effective Agents</span></a>
+          <a href="https://www.anthropic.com/engineering" target="_blank" rel="noopener"><b>Anthropic Engineering</b><span>Context, Tools, Evals, Long-running Agents</span></a>
+          <a href="https://platform.openai.com/docs" target="_blank" rel="noopener"><b>OpenAI</b><span>API, Tool Calling, Structured Outputs, Agents SDK</span></a>
+          <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener"><b>LangGraph</b><span>Stateful workflow, checkpoint, persistence</span></a>
+          <a href="https://google.github.io/adk-docs/" target="_blank" rel="noopener"><b>Google ADK</b><span>Một cách tiếp cận khác về agent architecture</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-project" id="project">
+      <div class="container">
+        <div class="section-kicker">DỰ ÁN TỐT NGHIỆP</div>
+        <h2>Local AI Media Agent</h2>
+        <p class="lead dark">Một agent nhận Video, Audio, Image và lệnh văn bản; tự lập kế hoạch, gọi đúng tool, theo dõi state, đánh giá kết quả và xuất media hoàn chỉnh.</p>
+        <div class="architecture">
+          <div class="node highlight">USER</div><div class="arrow">↓</div>
+          <div class="node">TASK MANAGER</div><div class="arrow">↓</div>
+          <div class="node highlight">LLM + PLAN</div><div class="arrow">↓</div>
+          <div class="node">TOOL ROUTER</div>
+          <div class="tool-row"><span>FFmpeg</span><span>Whisper</span><span>Vision</span><span>Python</span><span>APIs</span></div>
+          <div class="arrow">↓</div><div class="node">STATE</div><div class="arrow">↓</div>
+          <div class="node">EVALUATOR</div><div class="branch"><span>PASS → OUTPUT</span><span>FAIL → RETRY</span></div>
+        </div>
+        <div class="example"><strong>Ví dụ lệnh:</strong> “Hãy lấy video Zoom này, bỏ 3 phút đầu, lọc đoạn im lặng, tạo transcript, viết mô tả YouTube, tạo thumbnail và xuất video 1080p.”</div>
+      </div>
+    </section>
+
+    <section class="section end-note">
+      <div class="container narrow">
+        <blockquote>“Hãy học để có khả năng nhìn một quy trình công việc thực tế, phân rã nó, xác định phần nào dùng code — phần nào dùng AI — phần nào cần agent tự quyết định. Khi đó framework và model chỉ còn là linh kiện.”</blockquote>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">AI Agent Architecture • Giáo trình tự học • hktruc/hoc_ai</div>
+  </footer>
+</body>
+</html>
