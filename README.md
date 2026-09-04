@@ -2,10 +2,11 @@
 
 Website lưu giáo trình **28 bài / 7 chặng** về tư duy thiết kế AI Agent, hướng tới mục tiêu tự xây **agent chạy local + API + workflow chuyên biệt**.
 
-## Bản V2 — giáo trình chi tiết
+## Bản V3 — học, nộp bài và lưu điểm
 
 - Trang giới thiệu: `index.html`
 - **Khóa học chi tiết:** `course.html`
+- **Nộp bài & lưu kết quả:** `submit.html`
 - Chặng 1: `stage-1.html` — Tư duy nền tảng
 - Chặng 2: `stage-2.html` — Workflow Design
 - Chặng 3: `stage-3.html` — Tools & MCP
@@ -16,7 +17,21 @@ Website lưu giáo trình **28 bài / 7 chặng** về tư duy thiết kế AI A
 
 Website: https://hktruc.github.io/hoc_ai/
 
-**Vào thẳng giáo trình chi tiết:** https://hktruc.github.io/hoc_ai/course.html
+**Giáo trình:** https://hktruc.github.io/hoc_ai/course.html
+
+**Nộp bài:** https://hktruc.github.io/hoc_ai/submit.html
+
+## Cách nộp bài đơn giản
+
+Trang `submit.html` được thiết kế cho một người học duy nhất, không dùng backend, database hay API key:
+
+1. Chọn bài 1–28.
+2. Viết bài trực tiếp trên web; nháp được tự lưu bằng `localStorage`.
+3. Bấm **Chuẩn bị bài nộp** để tạo và copy một grading packet gồm tên bài, yêu cầu, rubric và bài làm.
+4. Bấm **Mở ChatGPT**, dán grading packet vào cuộc trò chuyện để được chấm và phản biện.
+5. Quay lại website, nhập điểm và nhận xét để lưu lịch sử các lần nộp.
+
+Mục tiêu chấm không chỉ là sản phẩm chạy được mà là chất lượng **tư duy thiết kế**: decomposition, ranh giới code/AI/human, assumption, overengineering, underengineering, failure modes và lập luận kiến trúc.
 
 ## Cấu trúc mỗi bài
 
@@ -40,20 +55,6 @@ Các mô hình do giáo trình tự tổng hợp (ví dụ `Goal → Task → Su
 - LangGraph / LangChain Docs — State, Persistence, Checkpoints, Interrupts, Human-in-the-loop.
 - Google Agent Development Kit — agent development lifecycle, tools, sessions/state, evaluation và deployment ecosystem.
 
-## Nội dung
-
-- Tư duy nền tảng về Agent / Workflow / Automation
-- Goal → Task → Action và Deterministic vs Probabilistic
-- Workflow patterns: chaining, routing, parallelization, orchestrator-worker, evaluator-optimizer
-- Function Calling, Tool Design, Tool Router, MCP
-- Context Engineering, Context Window, State, Memory, Filesystem as Memory
-- Agent Loop, Planning, Stopping Conditions, Error Recovery
-- Guardrails, Human-in-the-loop, Sandboxing, Evaluation
-- Framework Decision: raw API / OpenAI Agents SDK / LangGraph / Google ADK
-- Multi-Agent design
-- 4 mini projects
-- Dự án cuối khóa: **Local AI Media Agent**
-
 ## Cách học đề xuất
 
 - 8–10 tuần
@@ -62,7 +63,7 @@ Các mô hình do giáo trình tự tổng hợp (ví dụ `Goal → Task → Su
 - 20% tư duy kiến trúc
 - 50% làm project
 
-Tiến độ 28 bài được lưu trên trình duyệt bằng `localStorage`; không cần database hay đăng nhập.
+Tiến độ, nháp bài, điểm và nhận xét được lưu trên trình duyệt bằng `localStorage`; không cần database hay đăng nhập.
 
 ## Nguyên tắc xuyên suốt
 
