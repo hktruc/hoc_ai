@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chặng 7 — Framework & Production</title><link rel="stylesheet" href="course.css"></head><body><div class="top"><div class="wrap"><a class="brand" href="course.html">← AI AGENT ARCHITECTURE</a><nav><a href="#bai27">Bài 27</a><a href="#bai28">Bài 28</a><a href="#final-project">Dự án cuối khóa</a></nav></div></div><header class="hero2"><div class="wrap"><span class="badge">CHẶNG 07 • BÀI 27–28 + CAPSTONE</span><h1>Framework & Production</h1><p>Framework đến sau kiến trúc. Bạn sẽ học cách chọn mức abstraction phù hợp, tránh multi-agent không cần thiết và đóng gói toàn bộ kiến thức thành một Local AI Media Agent có eval, state và safety.</p><div class="progress-label" data-progress-label></div><div class="progress"><span data-progress-bar></span></div></div></header><main class="section"><div class="wrap"><article class="lesson" id="bai27"><header><div class="stage-no">BÀI 27</div><h2>Chọn framework: raw API, Agents SDK, LangGraph hay ADK?</h2></header><h3>Bài giảng</h3><p>Không có framework “tốt nhất” độc lập với bài toán. Hãy chọn theo thứ bạn muốn framework sở hữu. Nếu bạn muốn tự nắm loop, tool dispatch và state, raw model API cho độ minh bạch cao. Nếu muốn runtime quản lý turns, tools, guardrails, sessions và handoffs, Agents SDK giảm boilerplate. Nếu workflow là graph stateful với checkpoints, interrupts và resume, LangGraph mạnh ở orchestration/persistence. Google ADK cung cấp hệ sinh thái code-first cho agents, tools, sessions/evals và deployment trên Google Cloud.</p><div class="diagram">NEED MINIMAL CONTROL / LEARN CORE
+→ Python + raw API
+
+NEED agent runtime + tools + guardrails + tracing
+→ OpenAI Agents SDK
+
+NEED explicit state graph + checkpoints + interrupts
+→ LangGraph
+
+NEED Google agent ecosystem / ADK lifecycle
+→ Google ADK</div><p>Đây không phải thứ tự bắt buộc hay ranking chất lượng. Đây là roadmap học: tự xây loop nhỏ trước để hiểu cơ chế, rồi dùng framework để giảm code mà bạn đã hiểu.</p><h3>Thực hành</h3><div class="exercise"><ol><li>Lấy Mini project 3 hoặc 4.</li><li>Liệt kê những thứ bạn đang tự code: loop, tool schema, state, checkpoint, tracing, approval.</li><li>Chọn một framework và map từng responsibility sang framework feature.</li><li>Port một flow nhỏ, không port toàn dự án.</li><li>So sánh: lines of code, transparency, debug, lock-in, deployment.</li></ol><p><strong>Deliverable:</strong> Framework Decision Record (ADR) 1–2 trang, có lý do chọn và lý do không chọn các phương án còn lại.</p></div><div class="source-box"><h3>Nguồn</h3><p><span class="source-tag">O</span><a href="https://openai.github.io/openai-agents-python/">OpenAI Agents SDK</a>: mô tả khi dùng Responses API trực tiếp và khi dùng Agents SDK; primitives gồm agents, handoffs/agents-as-tools, guardrails, sessions, HITL, tracing.</p><p><span class="source-tag">L</span><a href="https://docs.langchain.com/oss/python/langgraph/persistence">LangGraph Persistence</a>: checkpoints, threads, memory, time travel và fault tolerance.</p><p><span class="source-tag">G</span><a href="https://google.github.io/adk-docs/tutorials/coding-with-ai/">Google ADK — Coding with AI</a>: lifecycle scaffold, build, test, evaluate và deploy; docs index/MCP.</p><p><span class="source-tag">BIÊN SOẠN</span>Bảng lựa chọn framework là heuristic của giáo trình, không phải tuyên bố chính thức của các hãng.</p></div><label class="lesson-check"><input type="checkbox" data-lesson="27"> Hoàn thành bài 27 và ADR.</label></article><article class="lesson" id="bai28"><header><div class="stage-no">BÀI 28</div><h2>Multi-Agent: chỉ dùng khi decomposition thật sự cần autonomy</h2></header><h3>Bài giảng</h3><p>Multi-agent tăng khả năng specialization nhưng cũng tăng context handoff, latency, cost, eval surface và failure modes. Trước khi tạo agent thứ hai, hỏi: nhiệm vụ này có thể là tool/function không? Có cần persona/context/toolset riêng? Có cần agent đó tự chạy loop độc lập không?</p><p>Hai pattern phổ biến là <strong>manager</strong> — agent trung tâm giữ quyền điều phối và gọi specialist như tools; và <strong>handoff</strong> — chuyển quyền xử lý sang specialist. Manager dễ tập trung policy; handoff giúp specialist sở hữu conversation/task riêng.</p><div class="diagram">SINGLE AGENT + TOOLS
+ưu tiên nếu đủ
+
+MANAGER
+  ├ specialist as tool
+  ├ specialist as tool
+  └ manager owns final answer
+
+HANDOFF
+triage agent → specialist owns next interaction</div><p>Một worker đơn giản không nhất thiết là agent. Nếu nó chỉ nhận input và trả output trong một bước, function/LLM call chuyên biệt thường dễ quản lý hơn.</p><h3>Bài tập</h3><div class="exercise"><ol><li>Vẽ Media Agent single-agent + tools.</li><li>Vẽ bản multi-agent: Planner, Media Worker, Content Worker, Reviewer.</li><li>Với từng agent, ghi lý do tại sao không thể là tool/function.</li><li>Nếu không có lý do mạnh, gộp lại.</li><li>Thiết kế handoff contract: input, context được truyền, expected output, ownership.</li><li>Chạy cùng 10 test cases trên 2 kiến trúc và so sánh success/cost/latency.</li></ol><p><strong>Deliverable:</strong> Multi-Agent Justification Report. Mục tiêu không phải chứng minh multi-agent tốt hơn; mục tiêu là biết khi nào nó đáng giá.</p></div><div class="source-box"><h3>Nguồn</h3><p><span class="source-tag">O</span><a href="https://openai.github.io/openai-agents-python/agents/">OpenAI Agents SDK — Agents</a>: manager (agents as tools) và handoffs là các composition patterns.</p><p><span class="source-tag">A</span><a href="https://www.anthropic.com/engineering/building-effective-agents">Building Effective Agents</a>: khuyến nghị dùng patterns đơn giản, composable và chỉ tăng complexity khi cải thiện outcome.</p></div><label class="lesson-check"><input type="checkbox" data-lesson="28"> Hoàn thành bài 28.</label></article><article class="lesson" id="final-project"><header><div class="stage-no">CAPSTONE</div><h2>Dự án cuối khóa — Local AI Media Agent</h2><p>Xây một agent local có thể nhận video/audio/image/text instruction, lập kế hoạch, dùng tool, lưu state, tự kiểm tra và xin phép trước side effects quan trọng.</p></header><h3>Use case chuẩn</h3><div class="callout"><p><strong>User:</strong> “Hãy lấy video Zoom này, bỏ 3 phút đầu, phát hiện các khoảng im lặng dài, tạo transcript, viết mô tả YouTube, xuất video 1080p và chuẩn bị thumbnail. Trước khi upload hoặc ghi đè file, phải hỏi tôi.”</p></div><h3>Kiến trúc mục tiêu</h3><div class="diagram">USER / CLI or WEB UI
+        ↓
+TASK INTAKE + VALIDATION
+        ↓
+PLANNER / ROUTER
+        ↓
+STATE MACHINE ───────────────┐
+        ↓                    │
+TOOL LAYER                   │
+├ filesystem.*               │
+├ media.* (FFmpeg/FFprobe)   │
+├ speech.*                   │
+├ vision.*                   │
+└ content.*                  │
+        ↓                    │
+OBSERVATIONS → EVALUATOR ────┘ retry/replan
+        ↓
+HUMAN APPROVAL for risky side effects
+        ↓
+ARTIFACTS + REPORT + TRACE</div><h3>Yêu cầu bắt buộc</h3><div class="grid"><div class="exercise"><h4>A. Architecture</h4><ul><li>Goal/task decomposition.</li><li>Deterministic vs AI matrix.</li><li>State schema và transitions.</li><li>Tool catalog + permission matrix.</li><li>Stopping/recovery policy.</li></ul></div><div class="exercise"><h4>B. Runtime</h4><ul><li>Chạy local.</li><li>Workspace riêng cho mỗi task.</li><li>Resume sau restart.</li><li>Structured logs/traces.</li><li>Config/API keys tách khỏi code.</li></ul></div><div class="exercise"><h4>C. AI</h4><ul><li>Ít nhất một router/planner.</li><li>Ít nhất một evaluation step.</li><li>Structured outputs.</li><li>Không dùng LLM cho việc deterministic đã có code tốt.</li></ul></div><div class="exercise"><h4>D. Safety</h4><ul><li>Không delete mặc định.</li><li>Không ghi ngoài workspace.</li><li>Approval trước upload/publish/overwrite.</li><li>Timeout + max turns + retry limits.</li></ul></div></div><h3>Milestones thực hiện</h3><div class="exercise"><ol><li><strong>M0 — Spec:</strong> viết problem statement, success criteria, non-goals.</li><li><strong>M1 — Deterministic core:</strong> FFmpeg/FFprobe tools chạy và test độc lập.</li><li><strong>M2 — LLM tool loop:</strong> model chọn read-only tools và tạo plan.</li><li><strong>M3 — State & resume:</strong> state.json/checkpoint, restart không mất tiến độ.</li><li><strong>M4 — Write tools:</strong> edit/render trong workspace, idempotency.</li><li><strong>M5 — Evaluator:</strong> validate artifact + content rubric + retry cap.</li><li><strong>M6 — HITL:</strong> approval cho overwrite/upload.</li><li><strong>M7 — Eval suite:</strong> tối thiểu 30 cases và baseline report.</li><li><strong>M8 — Framework optional:</strong> port sang Agents SDK/LangGraph/ADK nếu đem lại lợi ích rõ.</li><li><strong>M9 — Demo:</strong> quay video 5–10 phút từ input đến output và giải thích kiến trúc.</li></ol></div><h3>Definition of Done</h3><div class="rubric"><table><tr><th>Hạng mục</th><th>Điểm</th><th>Điều kiện</th></tr><tr><td>Task success</td><td>25</td><td>≥ 85% normal test cases hoàn thành</td></tr><tr><td>Architecture</td><td>20</td><td>Rõ boundaries, state, tools, stop/recovery</td></tr><tr><td>Reliability</td><td>15</td><td>Resume, retry hợp lý, không duplicate side effect</td></tr><tr><td>Safety</td><td>15</td><td>Workspace boundary + approval policy hoạt động</td></tr><tr><td>Evaluation</td><td>15</td><td>Dataset, graders, metrics, baseline</td></tr><tr><td>Documentation</td><td>10</td><td>README, architecture diagram, ADR, runbook</td></tr></table><p><strong>Đạt tốt nghiệp:</strong> ≥ 80/100 và không có lỗi safety nghiêm trọng.</p></div><h3>Cấu trúc repo gợi ý</h3><pre>media-agent/
+├─ README.md
+├─ architecture.md
+├─ pyproject.toml
+├─ src/
+│  ├─ agent.py
+│  ├─ state.py
+│  ├─ policies.py
+│  └─ tools/
+│     ├─ filesystem.py
+│     ├─ media.py
+│     ├─ speech.py
+│     └─ content.py
+├─ evals/
+│  ├─ cases.jsonl
+│  ├─ graders.py
+│  └─ baseline.md
+├─ tests/
+└─ workspace/</pre><div class="source-box"><h3>Nguồn tổng hợp capstone</h3><p>Capstone là <strong>thiết kế gốc của giáo trình</strong>, tổng hợp các nguyên tắc đã học từ Anthropic Building Effective Agents/Context/Tools/Evals, OpenAI Agents SDK tools/guardrails/tracing/sessions/HITL, LangGraph persistence/interrupts và MCP primitives. Không phải dự án mẫu chính thức của một hãng.</p></div></article><section class="callout"><h2>Bạn đã hoàn thành nền kiến thức kiến trúc</h2><p>Đích đến của 28 bài không phải thuộc tên pattern. Bạn cần có khả năng nhìn một quy trình mới và tự trả lời theo thứ tự: <strong>Problem → Process → Decomposition → Code/AI/Human → Workflow → Tools → Context → State → Loop → Safety → Evals → Framework.</strong></p></section><div class="course-nav"><a href="stage-6.html">← Chặng 6</a><a href="course.html">Quay về trang khóa học →</a></div></div></main><script src="course.js"></script></body></html>
